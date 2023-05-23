@@ -16,6 +16,18 @@ class HomePage extends StatelessWidget {
 
     // Add more image paths here
   ];
+  final List<String> imageDescription = [
+    'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry',
+    'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
+    'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
+    'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
+    'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
+    'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
+    'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
+    'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
+    'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.',
+    'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.'
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +45,9 @@ class HomePage extends StatelessWidget {
         itemCount: imagePaths.length,
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
-              onTap: () {},
+              onTap: () {
+                _showImageDescription(context, imageDescription[index]);
+              },
               child: Image.asset(
                 imagePaths[index],
                 fit: BoxFit.cover,
@@ -42,4 +56,23 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
+}
+
+void _showImageDescription(BuildContext context, String description) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Image Description'),
+        content: Text(description),
+        actions: [
+          TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Close')),
+        ],
+      );
+    },
+  );
 }
